@@ -122,7 +122,7 @@ graph = graph_builder.compile(checkpointer=memory)
 st.set_page_config(page_title="🤖 Chef Agente", page_icon="🧑‍🍳")
 
 st.title("🧑‍🍳 Chef Agente")
-st.caption("Um Agente de IA que mostra o que está fazendo por baixo dos panos.")
+st.caption("Um Chef de IA que consegue gerar receitas com seus ingredientes.")
 
 # Inicializa o histórico de mensagens se ele não existir
 if "messages" not in st.session_state:
@@ -160,4 +160,5 @@ if prompt := st.chat_input("Ingredientes Disponíveis (Ex: ovos, queijo e tomate
         st.session_state.messages = result['messages']
         
         # Força o Streamlit a rodar o script do início para redesenhar a tela com as novas mensagens
+
         st.rerun()
