@@ -158,7 +158,6 @@ if prompt := st.chat_input("Ingredientes Disponíveis (Ex: ovos, queijo e tomate
         
         # Substitui o histórico antigo pelo histórico completo e atualizado da execução
         st.session_state.messages = result['messages']
-        
-        # Força o Streamlit a rodar o script do início para redesenhar a tela com as novas mensagens
 
         st.rerun()
+
