@@ -8,6 +8,7 @@ Desenvolver um Agente de IA ReACT com uma TOOL, utilizando interface Streamlit e
 Este projeto é um agente de IA construído sobre três pilares principais: uma ferramenta para interagir com o mundo, o agente e uma interface web para conversar com o usuário.
 
 * A Ferramenta(Tool): buscador_de_receitas 🧑‍🍳
+
 O coração da funcionalidade do agente é uma ferramenta customizada que se conecta à API do Spoonacular. A função dela é:
 
 Receber uma lista de ingredientes do usuário.
@@ -17,6 +18,7 @@ Chamar a API externa para encontrar receitas que usem esses ingredientes.
 Formatar o resultado de forma clara, mostrando as receitas encontradas, os ingredientes que o usuário já tem e os que faltam.
 
 * O Agente: LangGraph 🧠
+
 Em vez de um fluxo linear, o agente usa LangGraph.
 
 Raciocinar (Reasoning): Quando o usuário envia uma mensagem (ex: "tenho ovos e queijo"), o nó principal chatbot é ativado. Usando o modelo Llama3 via Groq, ele analisa a mensagem e o prompt do sistema. Ele percebe que, para cumprir a tarefa, precisa de informações externas e decide que a melhor ação é usar a ferramenta buscador_de_receitas.
