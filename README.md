@@ -28,9 +28,11 @@ Agir (Acting): A decisão é enviada a um roteador, que direciona o fluxo para o
 Observar e Raciocinar de Novo: O resultado da ferramenta (a lista de receitas) é enviado de volta ao nó chatbot. O agente agora "observa" essa nova informação e, seguindo as instruções do prompt, sua nova tarefa se torna "apresentar este resultado de forma amigável ao usuário".
 
 * A Interface: Streamlit 🖥️
+
 A interface web foi construída com Streamlit e o Deploy foi feito no Streamlit Community.
 
-* Observabilidade: LangSmith ιχ
+* Observabilidade: LangSmith
+
 Cada chamada ao LLM, cada decisão do roteador e cada execução da ferramenta são rastreadas e enviadas para o LangSmith. Isso permite depurar o fluxo de pensamento do agente, monitorar o uso das APIs e garantir que ele esteja se comportando como esperado.
 
 [Streamlit Link](https://case-distrito-icmapevhxqg7eicdnvxppl.streamlit.app/)
