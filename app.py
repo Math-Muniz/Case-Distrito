@@ -72,7 +72,7 @@ llm_tradutor = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=G
 prompt_agente = ChatPromptTemplate.from_messages([
     ("system", 
     "Você é um assistente de culinária. Sua tarefa é usar a ferramenta 'buscador_de_receitas' com os ingredientes fornecidos."
-    "Após receber o resultado da ferramenta, apresente a informação de forma clara em português."),
+    "Após receber o resultado da ferramenta, apresente a informação retirada da ferrameta de forma clara em português."),
     MessagesPlaceholder(variable_name="messages"),
 ])
 chain_agente = prompt_agente | llm_with_tools
@@ -161,3 +161,4 @@ if prompt := st.chat_input("Ingredientes Disponíveis (Ex: Tomate, queijo e ovo)
         
         st.session_state.messages = messages_para_exibir
         st.rerun()
+
