@@ -13,10 +13,10 @@ O núcleo da ação do agente. É uma função que se conecta à API do Spoonacu
 ### O Cérebro do Agente: Uma "Linha de Montagem" com LangGraph 🧠
 O agente é construído como um grafo com múltiplos nós, criando uma linha de montagem inteligente:
 
-* Nó 1: O Tradutor (com Gemini)
+* Nó 1: O Tradutor (com Gemini-2.5-flash)
 Quando o usuário envia uma mensagem em português (ex: "carne de hambúrguer"), o primeiro nó é ativado. Ele usa um LLM especialista em tradução e contexto, o Gemini 1.5 Flash, para converter o input para termos culinários precisos em inglês (ex: "ground beef").
 
-* Nó 2: O Agente ReAct (com Llama3)
+* Nó 2: O Agente ReAct (com Llama-3.3-70b-versatile)
 Com os ingredientes já traduzidos, o fluxo passa para o nó principal do agente. Usando o Llama3 via Groq, ele analisa o texto em inglês e executa o ciclo ReAct: raciocina que precisa usar a ferramenta buscador_de_receitas e age, passando os ingredientes corretos para ela.
 
 * Nó 3: A Ferramenta e a Resposta Final
