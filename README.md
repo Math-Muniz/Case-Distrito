@@ -4,35 +4,27 @@
 
 Desenvolver um Agente de IA ReACT com uma TOOL, utilizando interface Streamlit e usando o Langsmith para observação.
 
-## Como Funciona
-Este projeto é um agente de IA construído sobre três pilares principais: uma ferramenta para interagir com o mundo, o agente e uma interface web para conversar com o usuário.
+Como Funciona
+Este projeto utiliza uma arquitetura de agente multi-passo com dois LLMs especialistas para garantir uma tradução robusta e uma busca de receitas eficiente.
 
-* A Ferramenta(Tool): buscador_de_receitas 🧑‍🍳
+1. A Ferramenta (Tool): buscador_de_receitas 🧑‍🍳
+O núcleo da ação do agente. É uma função que se conecta à API do Spoonacular para buscar receitas, mas com uma regra importante: ela espera receber os ingredientes já em inglês e em termos culinários específicos.
 
-O coração da funcionalidade do agente é uma ferramenta customizada que se conecta à API do Spoonacular. A função dela é:
+2. O Cérebro do Agente: Uma "Linha de Montagem" com LangGraph 🧠
+O agente é construído como um grafo com múltiplos nós, criando uma linha de montagem inteligente:
 
-Receber uma lista de ingredientes do usuário.
+Nó 1: O Tradutor (com Gemini)
+Quando o usuário envia uma mensagem em português (ex: "carne de hambúrguer"), o primeiro nó é ativado. Ele usa um LLM especialista em tradução e contexto, o Gemini 1.5 Flash, para converter o input para termos culinários precisos em inglês (ex: "ground beef").
 
-Chamar a API externa para encontrar receitas que usem esses ingredientes.
+Nó 2: O Agente ReAct (com Llama3)
+Com os ingredientes já traduzidos, o fluxo passa para o nó principal do agente. Usando o Llama3 via Groq, ele analisa o texto em inglês e executa o ciclo ReAct: raciocina que precisa usar a ferramenta buscador_de_receitas e age, passando os ingredientes corretos para ela.
 
-Formatar o resultado de forma clara, mostrando as receitas encontradas, os ingredientes que o usuário já tem e os que faltam.
+Nó 3: A Ferramenta e a Resposta Final
+O nó da ferramenta é executado, e o resultado da busca retorna ao agente. Ele então formula a resposta final de forma amigável para o usuário, em português.
 
-* O Agente: LangGraph 🧠
+3. A Interface e a Observabilidade 🖥️
+Interface (Streamlit): A conversa acontece em uma interface web construída com Streamlit e implantada no Streamlit Community Cloud.
 
-Em vez de um fluxo linear, o agente usa LangGraph.
+Observabilidade (LangSmith): Cada passo da linha de montagem — a tradução com Gemini, a decisão do Llama3 e a execução da ferramenta — é rastreado no LangSmith, permitindo uma depuração completa do fluxo de pensamento do agente.
 
-Raciocinar (Reasoning): Quando o usuário envia uma mensagem (ex: "tenho ovos e queijo"), o nó principal chatbot é ativado. Usando o modelo Llama3 via Groq, ele analisa a mensagem e o prompt do sistema. Ele percebe que, para cumprir a tarefa, precisa de informações externas e decide que a melhor ação é usar a ferramenta buscador_de_receitas.
-
-Agir (Acting): A decisão é enviada a um roteador, que direciona o fluxo para o nó tools. Este nó executa a ferramenta, que chama a API do Spoonacular e obtém os dados das receitas.
-
-Observar e Raciocinar de Novo: O resultado da ferramenta (a lista de receitas) é enviado de volta ao nó chatbot. O agente agora "observa" essa nova informação e, seguindo as instruções do prompt, sua nova tarefa se torna "apresentar este resultado de forma amigável ao usuário".
-
-* A Interface: Streamlit 🖥️
-
-A interface web foi construída com Streamlit e o Deploy foi feito no Streamlit Community.
-
-* Observabilidade: LangSmith
-
-Cada chamada ao LLM, cada decisão do roteador e cada execução da ferramenta são rastreadas e enviadas para o LangSmith. Isso permite depurar o fluxo de pensamento do agente, monitorar o uso das APIs e garantir que ele esteja se comportando como esperado.
-
-[Streamlit Link](https://case-distrito-icmapevhxqg7eicdnvxppl.streamlit.app/)
+[Streamlit Link](https://case-distrito-6pvyqudt4vftoggg8puhxw.streamlit.app/)
