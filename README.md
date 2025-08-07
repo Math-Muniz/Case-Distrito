@@ -1,4 +1,4 @@
-# Case-Distrito
+# Case Técnico - Consultoria Distrito
 
 ## Desafio
 
