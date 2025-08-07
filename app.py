@@ -84,7 +84,6 @@ class State(dict):
 # -- Nós do Grafo --
 def tradutor(state: State):
     """Nó que traduz e refina os ingredientes do usuário."""
-    print("--- NÓ TRADUTOR ---")
     user_input = state['messages'][-1].content
     
     prompt_tradutor = ChatPromptTemplate.from_template(
