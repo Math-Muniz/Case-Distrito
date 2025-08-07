@@ -4,27 +4,27 @@
 
 Desenvolver um Agente de IA ReACT com uma TOOL, utilizando interface Streamlit e usando o Langsmith para observação.
 
-Como Funciona
+## Como Funciona
 Este projeto utiliza uma arquitetura de agente multi-passo com dois LLMs especialistas para garantir uma tradução robusta e uma busca de receitas eficiente.
 
-1. A Ferramenta (Tool): buscador_de_receitas 🧑‍🍳
+### A Ferramenta (Tool): buscador_de_receitas 🧑‍🍳
 O núcleo da ação do agente. É uma função que se conecta à API do Spoonacular para buscar receitas, mas com uma regra importante: ela espera receber os ingredientes já em inglês e em termos culinários específicos.
 
-2. O Cérebro do Agente: Uma "Linha de Montagem" com LangGraph 🧠
+### O Cérebro do Agente: Uma "Linha de Montagem" com LangGraph 🧠
 O agente é construído como um grafo com múltiplos nós, criando uma linha de montagem inteligente:
 
-Nó 1: O Tradutor (com Gemini)
+* Nó 1: O Tradutor (com Gemini)
 Quando o usuário envia uma mensagem em português (ex: "carne de hambúrguer"), o primeiro nó é ativado. Ele usa um LLM especialista em tradução e contexto, o Gemini 1.5 Flash, para converter o input para termos culinários precisos em inglês (ex: "ground beef").
 
-Nó 2: O Agente ReAct (com Llama3)
+* Nó 2: O Agente ReAct (com Llama3)
 Com os ingredientes já traduzidos, o fluxo passa para o nó principal do agente. Usando o Llama3 via Groq, ele analisa o texto em inglês e executa o ciclo ReAct: raciocina que precisa usar a ferramenta buscador_de_receitas e age, passando os ingredientes corretos para ela.
 
-Nó 3: A Ferramenta e a Resposta Final
+* Nó 3: A Ferramenta e a Resposta Final
 O nó da ferramenta é executado, e o resultado da busca retorna ao agente. Ele então formula a resposta final de forma amigável para o usuário, em português.
 
-3. A Interface e a Observabilidade 🖥️
-Interface (Streamlit): A conversa acontece em uma interface web construída com Streamlit e implantada no Streamlit Community Cloud.
+### A Interface e a Observabilidade 🖥️
+* Interface (Streamlit): A conversa acontece em uma interface web construída com Streamlit e implantada no Streamlit Community Cloud.
 
-Observabilidade (LangSmith): Cada passo da linha de montagem — a tradução com Gemini, a decisão do Llama3 e a execução da ferramenta — é rastreado no LangSmith, permitindo uma depuração completa do fluxo de pensamento do agente.
+* Observabilidade (LangSmith): Cada passo da linha de montagem — a tradução com Gemini, a decisão do Llama3 e a execução da ferramenta — é rastreado no LangSmith, permitindo uma depuração completa do fluxo de pensamento do agente.
 
 [Streamlit Link](https://case-distrito-6pvyqudt4vftoggg8puhxw.streamlit.app/)
