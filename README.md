@@ -12,7 +12,7 @@ Este projeto utiliza uma arquitetura de agente multi-passo com dois LLMs especia
 
 O núcleo da ação do agente. É uma função que se conecta à API do Spoonacular para buscar receitas, mas com uma regra importante: ela espera receber os ingredientes já em inglês e em termos culinários específicos.
 
-### O Cérebro do Agente: Uma "Linha de Montagem" com LangGraph 🧠
+### Agente com LangGraph 🧠
 
 O agente é construído como um grafo com múltiplos nós:
 
